@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Navbar from "./Navbar";
 
 const SignUp = () => {
 
@@ -28,7 +29,7 @@ const SignUp = () => {
                 <button onClick = {() => {setChange(false)}} 
                   type="submit"
                   // className="border-2 border-sky-400 hover:bg-sky-400 hover:text-white rounded-xl hover:border-sky-200 p-2 m-2 mb-5"
-                  className="px-7 py-2 relative bg-gradient-to-r from-sky-200 to-blue-400 rounded-xl"
+                    className="px-7 py-2 relative bg-gradient-to-r from-sky-200 to-blue-400 rounded-xl"
                 >
                   Login
                 </button>
@@ -44,7 +45,7 @@ const SignUp = () => {
               <input 
               className={`${
                 change
-                  ? 'outline-none'
+                  ? ''
                   : 'hidden'
               } border-2 rounded-xl hover:border-sky-400 p-2 m-2 `}
                 type="text"
@@ -55,7 +56,7 @@ const SignUp = () => {
               <input
               className={`${
                 change
-                  ? 'outline-none'
+                  ? ''
                   : 'hidden'
               } border-2 rounded-xl hover:border-sky-400 p-2 m-2 `}
                 type="text"
@@ -84,6 +85,7 @@ const SignUp = () => {
               } border-2 border-sky-400 hover:bg-sky-400 hover:text-white rounded-xl hover:border-sky-200 p-2 m-2 mb-5 shadow-lg`}
                 type="submit"
                 // className="border-2 border-sky-400 hover:bg-sky-400 hover:text-white rounded-xl hover:border-sky-200 p-2 m-2 mb-5 shadow-lg"
+              
               >
                 Login
               </button>
@@ -95,6 +97,7 @@ const SignUp = () => {
               } border-2 border-sky-400 hover:bg-sky-400 hover:text-white rounded-xl hover:border-sky-200 p-2 m-2 mb-5 shadow-lg`}
                 type="submit"
                 // className="border-2 border-sky-400 hover:bg-sky-400 hover:text-white rounded-xl hover:border-sky-200 p-2 m-2 mb-5 shadow-lg"
+                
               >
                 Sign Up
               </button>
