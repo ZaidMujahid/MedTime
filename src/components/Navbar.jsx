@@ -13,7 +13,7 @@ const Navbar = () => {
       <nav className="shadow-md w-full fixed top-0 left-0 bg-sky-50 py-3 px-7 md:flex items-center justify-between">
         <div>
         <span>
-        <GiMedicines className="inline text-5xl mx-2 text-sky-900"/>
+        <GiMedicines className="inline text-5xl mx-2 text-sky-600"/>
         </span>
         <h1 className="font-bold text-2xl cursor-pointer bg-clip-text text-gray-900 inline">Medtime</h1>
         </div>
@@ -33,7 +33,7 @@ const Navbar = () => {
           {open ? <MdClose/> : <GiHamburgerMenu/>}
           </button>
           <button>
-          <MdAccountCircle className="ml-8 text-3xl cursor-pointer text-sky-900 hover:text-sky-600 duration-500 absolute top-5 right-8"/>
+          <MdAccountCircle className="ml-8 text-3xl cursor-pointer text-sky-600 hover:text-sky-500 duration-500 absolute top-5 right-8"/>
           </button>
       </nav>
     </div>

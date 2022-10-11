@@ -3,7 +3,8 @@ import Navbar from './components/Navbar';
 import SignUp from './components/SignUp';
 import Hero from './components/Hero';
 import Reminders from './components/Reminders';
-
+import Map from './components/Map';
+import Footer from './components/Footer';
 function App() {
   return (
     <div>
@@ -12,7 +13,9 @@ function App() {
       <main className="mx-auto justify-center items-center px-6 py-20 md:px-8 lg:px-12">
         <Hero />
         <Reminders/>
+        <Map/>
       </main>
+      <Footer/>
     </div>
   );
 }
