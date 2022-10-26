@@ -2,16 +2,16 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const medicineSchema = new Schema({
-    title: {
+const appointmentSchema = new Schema({
+    name: {
         type: String,
         required: true
     },
-    count: {
+    number: {
         type: Number,
         required: true
     },
-    about: {
+    description: {
         type: String
     },
     time: {
@@ -21,4 +21,5 @@ const medicineSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('Medicine', medicineSchema)
+
+module.exports = mongoose.model('Appointment', appointmentSchema)

@@ -10,7 +10,7 @@ function App() {
     <div>
       {/* <SignUp/> */}
       <Navbar/>
-      <main className="mx-auto justify-center items-center px-6 py-20 md:px-8 lg:px-12">
+      <main className="mx-auto justify-center items-center px-6 pt-20 md:px-8 lg:px-12 z-10">
         <Hero />
         <Reminders/>
         <Map/>

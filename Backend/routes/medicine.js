@@ -6,7 +6,7 @@ const Medicine = require('../models/medicineModel')
 //GET all reminders
 router.get('/', async (req, res) => {
     //find all the medicines and sort them according to the created time
-    const medicines = await Medicine.find({}).sort({createdAt: -1})
+    const medicines = await Medicine.find({}).sort({time: -1})
 
     res.status(200).json(medicines)
 })
@@ -32,6 +32,17 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     //destructuring the required properties
     const {title, count, about, time} = req.body;
+
+    //error message
+    let emptyFields = []
+    if(!title) emptyFields.push('title')
+    if(!count) emptyFields.push('count')
+    if(!time) emptyFields.push('time')
+
+    if(emptyFields.length > 0){
+        return res.status(400).json({error: 'Please fill all the required fields'})
+    }
+    
     //create a reminder
     try {
         const medicine = await Medicine.create({title, count, about, time})

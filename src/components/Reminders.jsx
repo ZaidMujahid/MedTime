@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { MdOutlineNotificationAdd } from "react-icons/md";
+import AddMedicine from "./AddMedicine";
+import AddAppoint from "./AddAppoint";
 import PopupAppoint from "./PopupAppoint";
 import PopupMed from "./PopupMed";
 const Reminders = () => {
@@ -29,6 +31,7 @@ const Reminders = () => {
         >
           Medicine
         </button>
+        
         <button
           onClick={() => {
             setChange(true);
@@ -45,7 +48,7 @@ const Reminders = () => {
         className={`${
           change ? "hidden" : ""
         }
-         relative flex group-hover:text-white text-sky-500 bg-sky-200 rounded-lg px-8 py-2 md:left-[525px] left-[50px] mt-20 font-medium text-lg hover:border-2 hover:border-sky-600 hover:bg-white hover:scale-600 duration-500`}
+          flex align-center justify-center group-hover:text-white text-sky-500 bg-sky-200 rounded-lg px-8 py-2 mx-auto mt-10 font-medium text-lg hover:border-2 hover:border-sky-600 hover:bg-white hover:scale-600 duration-500`}
       >
         Add Medicine
         <MdOutlineNotificationAdd className="mx-2 mt-1 h-[1.3rem] w-[1.3rem]" />
@@ -53,11 +56,13 @@ const Reminders = () => {
         {
           med ? <PopupMed onClose={handleOnClose} /> : "" 
         }
+        {change ? "" : <AddMedicine/>}
       <button
         onClick = {()=>{setAppoint(true)}}
         className={`${
           change ? "" : "hidden"
-        } relative flex group-hover:text-white text-sky-500 bg-sky-200 rounded-lg px-8 py-2 md:left-[500px] left-[50px] mt-20 font-medium text-lg hover:border-2 hover:border-sky-600 hover:bg-white hover:scale-600 duration-500`}
+        } 
+        flex align-center justify-center group-hover:text-white text-sky-500 bg-sky-200 rounded-lg px-8 py-2 mx-auto mt-10 font-medium text-lg hover:border-2 hover:border-sky-600 hover:bg-white hover:scale-600 duration-500`}
       >
         Add Appointment
         <MdOutlineNotificationAdd className="mx-2 mt-1 h-[1.3rem] w-[1.3rem]" />
@@ -65,6 +70,7 @@ const Reminders = () => {
         {
           appoint ? <PopupAppoint onClose={handleOnClose} /> : ""
         }
+        {change ? <AddAppoint/> : ""}
     </div>
   );
 };

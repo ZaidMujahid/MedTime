@@ -10,7 +10,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <nav className="shadow-md w-full fixed top-0 left-0 bg-sky-50 py-3 px-7 md:flex items-center justify-between">
+      <nav className="shadow-md w-full fixed top-0 left-0 bg-sky-50 pt-3 md:py-3 px-7 md:flex items-center justify-between z-20">
         <div>
         <span>
         <GiMedicines className="inline text-5xl mx-2 text-sky-600"/>

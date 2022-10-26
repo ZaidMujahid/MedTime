@@ -1,16 +1,16 @@
 import React from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
 import "../App.css";
 const Map = () => {
-//   var map = L.map("map").setView([51.505, -0.09], 13);
-//   var map = L.map("map").fitWorld();
+  // var map = L.map("map").setView([51.505, -0.09], 13);
+  // var map = L.map("map").fitWorld();
 
-//   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-//     maxZoom: 19,
-//     attribution: "© OpenStreetMap",
-//   }).addTo(map);
+  // L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  //   maxZoom: 19,
+  //   attribution: "© OpenStreetMap",
+  // }).addTo(map);
 
-//   map.locate({ setView: true, maxZoom: 16 });
+  // map.locate({ setView: true, maxZoom: 16 });
 
   return (
     <div>
@@ -19,8 +19,8 @@ const Map = () => {
           Navigate Hospitals
         </h1>
       </div>
-      <div className="flex justify-center items-center my-2 md:h-[70vh] w-[95%] mx-auto">
-        <MapContainer
+      <div className="flex justify-center items-center md:h-[70vh] w-[95%] mx-auto z-0">
+        <MapContainer className=""
           center={[19.1478218, 72.8386159]}
           zoom={16}
           scrollWheelZoom={false}
