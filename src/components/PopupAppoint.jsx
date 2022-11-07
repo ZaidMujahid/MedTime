@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
 import { useRemindersContext } from "../hooks/useRemindersContext";
 const PopupAppoint = ({ onClose }) => {
   
+  const {user} = useAuthContext()
   const { dispatch } = useRemindersContext()
   const [name, setName] = useState('');//for name
   const [number, setNumber] = useState('');
@@ -12,13 +14,19 @@ const PopupAppoint = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if(!user){
+      setError('You must be logged in')
+      return
+    }
+
     const appointment = {name, number, description, time}
 
     const response = await fetch('/appointments', {
       method: 'POST',
       body: JSON.stringify(appointment),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
       }
     })
     const json = await response.json()
@@ -94,7 +102,7 @@ const PopupAppoint = ({ onClose }) => {
             Cancel
           </button>
         </div>
-        {error && <div className="bg-red-300 font-medium rounded-lg text-center m-1">{error}</div>}
+        {error && <div className="text-lg text-red-600 block text-center">{error}</div>}
       </form>
     </div>
   );

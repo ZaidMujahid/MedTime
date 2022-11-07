@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
 import { useRemindersContext } from "../hooks/useRemindersContext";
 const PopupMed = ({ onClose }) => {
 
+  const {user} = useAuthContext()
   const { dispatch } = useRemindersContext()
-  const [changeCount, setChangeCount] = useState(false);//for radio checkboxex
+  // const [changeCount, setChangeCount] = useState(false);//for radio checkboxex
   const [title, setTitle] = useState('');//for fetching data
   const [count, setCount] = useState('');
   const [about, setAbout] = useState('');
@@ -13,13 +15,19 @@ const PopupMed = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if(!user){
+      setError('You must be logged in')
+      return
+    }
+
     const medicine = {title, count, about, time}
 
     const response = await fetch('/reminders', {
       method: 'POST',
       body: JSON.stringify(medicine),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
       }
     })
     const json = await response.json()
@@ -52,67 +60,19 @@ const PopupMed = ({ onClose }) => {
           className="border-2 rounded-xl hover:border-sky-400 md:p-2 md:m-2 p-1 m-1 outline-none"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
-        />
-
-        <div className="flex justify-around p-1">
-          <div>
-            <input
-              type="radio"
-              onClick={() => {
-                setChangeCount(!changeCount);
-              }}
-              className="m-2 w-4 h-4 outline-none focus:ring-2 focus:ring-blue-300 border-gray-300"
-              checked
-            />
-            <label
-              for="option-1"
-              className="relative text-md bottom-0.5 font-medium text-gray-900"
-            >
-              Count
-            </label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              onClick={() => {
-                setChangeCount(!changeCount);
-              }}
-              className="m-2 w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
-            />
-            <label
-              for="option-1"
-              className="relative text-md bottom-0.5 font-medium text-gray-900"
-            >
-              ml
-            </label>
-          </div>
-        </div>
+        />  
 
         <label
           htmlFor=""
-          className={`${changeCount ? "hidden" : ""} 
-          text-md font-semibold md:pt-2 md:pl-2 pt-1 pl-1`}
+          className= 
+          "text-md font-semibold md:pt-2 md:pl-2 pt-1 pl-1"
         >
-          Enter Count: *
+          Enter Count/ml: *
         </label>
         <input
           type="number"
-          className={`${changeCount ? "hidden" : ""} 
-          border-2 rounded-xl hover:border-sky-400 md:p-2 md:m-2 p-1 m-1 outline-none`}
-            onChange={(e) => setCount(e.target.value)}
-            value={count}
-        />
-        <label
-          htmlFor=""
-          className={`${changeCount ? "" : "hidden"} 
-          text-md font-semibold md:pt-2 md:pl-2 pt-1 pl-1`}
-        >
-          Enter ml: *
-        </label>
-        <input
-          type="number"
-          className={`${changeCount ? "" : "hidden"} 
-          border-2 rounded-xl hover:border-sky-400 md:p-2 md:m-2 p-1 m-1 outline-none`}
+          className=
+          "border-2 rounded-xl hover:border-sky-400 md:p-2 md:m-2 p-1 m-1 outline-none"
             onChange={(e) => setCount(e.target.value)}
             value={count}
         />
@@ -146,7 +106,7 @@ const PopupMed = ({ onClose }) => {
             Cancel
           </button>
         </div>
-        {error && <div className="bg-red-300 font-medium rounded-lg text-center m-1">{error}</div>}
+        {error && <div className="text-lg text-red-600 block text-center">{error}</div>}
       </form>
     </div>
   );

@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config(); 
 
 const express = require('express')
 const mongoose = require('mongoose')
@@ -7,6 +7,7 @@ const app = express();
 //imorting medicine routes i.e medicine.js
 const medicineRoutes = require('./routes/medicine')
 const appointmentRoutes = require('./routes/appointment')
+const userRoutes = require('./routes/user')
 
 //middleware
 app.use(express.json())
@@ -19,6 +20,7 @@ app.use((req, res, next) => {
 //when we fire req to /reminders then use medicineRoutes, so it will add the path according to the req, ex: for get it will be /reminders/
 app.use('/reminders', medicineRoutes)
 app.use('/appointments', appointmentRoutes)
+app.use('/user', userRoutes)
 
 
 //Connect to db
@@ -32,6 +34,4 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((error) => {
         console.log(error)
     })
-
-
 

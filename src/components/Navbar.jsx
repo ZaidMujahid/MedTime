@@ -1,40 +1,63 @@
-import {React, useState} from "react";
-import { GiMedicines, GiHamburgerMenu } from "react-icons/gi";
-import { MdAccountCircle, MdClose } from "react-icons/md";
+import { React } from "react";
+import { GiMedicines } from "react-icons/gi";
+import { useLogout } from "../hooks/useLogout";
+import { Link } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
+
 const Navbar = () => {
-  let Links = [
-    {name: "Home", link:"/"},
-    {name: "Reminders", link:"/Reminders"},
-    {name: "Nearby", link:"/Nearby"},
-  ];
-  const [open, setOpen] = useState(false);
+  const { user } = useAuthContext();
+  const { logout } = useLogout();
+  //for logout button
+  const handleClick = () => {
+    logout();
+  };
   return (
     <div>
-      <nav className="shadow-md w-full fixed top-0 left-0 bg-sky-50 pt-3 md:py-3 px-7 md:flex items-center justify-between z-20">
-        <div>
-        <span>
-        <GiMedicines className="inline text-5xl mx-2 text-sky-600"/>
-        </span>
-        <h1 className="font-bold text-2xl cursor-pointer bg-clip-text text-gray-900 inline">Medtime</h1>
+      <nav className="shadow-md w-full fixed top-0 left-0 bg-sky-50 py-3 md:pt-3 md:py-3 px-2 md:px-7 flex items-center justify-between z-20">
+        <div className="flex justify-between w-full">
+          <div>
+
+          <Link to="/">
+            <div className="">
+              <span>
+                <GiMedicines className="inline text-3xl md:text-5xl md:mx-2 text-sky-600 mr-1" />
+              </span>
+              <h1 className="font-bold text-2xl cursor-pointer bg-clip-text text-gray-900 inline">
+                Medtracker
+              </h1>
+            </div>
+          </Link>
+          </div>
+
+          {!user && (
+            <div>
+              <Link to="/login">
+                <button className="py-1 md:px-2 font-medium md:text-lg bg-sky-50 border-2 border-sky-600 rounded-lg text-sky-500 md:mr-2 hover:shadow-md px-1 sm:ml-4">
+                  Log in
+                </button>
+              </Link>
+              <Link to="/signup">
+                <button className="py-1 md:px-2 font-medium md:text-lg border-2 border-sky-600 rounded-lg text-white bg-sky-500 md:ml-2 hover:shadow-md md:mr-2 px-1 ml-1 mr-2">
+                  Sign up
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
-        
-        <div>
-          <ul className={`md:flex items-center absolute bg-sky-50 w-full left-0 md:z-auto md:w-auto md:pb-0 pb-2 md:pl-0 pl-10 z-[-1] md:static shadow-md md:shadow-none ${open ? 'top-20':'top-[-490px]'}`}>
-            {
-            Links.map((link)=>(
-              <li className="md:mr-9 text-xl md:my-0 my-7 items:center">
-                <a href={link.link} className="text-gray-900 hover:text-sky-600 duration-500 font-semibold">{link.name}</a>
-              </li>
-            ))
-          }   
-          </ul>
-        </div>
-          <button onClick={() => setOpen(!open)}className="ml-8 text-3xl cursor-pointer text-sky-900 hover:text-sky-600 duration-500 absolute top-5 right-20 md:hidden">
-          {open ? <MdClose/> : <GiHamburgerMenu/>}
-          </button>
-          <button>
-          <MdAccountCircle className="ml-8 text-3xl cursor-pointer text-sky-600 hover:text-sky-500 duration-500 absolute top-5 right-8"/>
-          </button>
+
+        {user && (
+          <div className="flex">
+            <span className=" py-1 text-lg font-medium mr-2">
+              {user.email.split("@", 1)}
+            </span>
+            <button
+              className="py-1 px-2 font-medium text-lg bg-sky-50 border-2 border-sky-600 rounded-lg hover:shadow-md"
+              onClick={handleClick}
+            >
+              Logout
+            </button>
+          </div>
+        )}
       </nav>
     </div>
   );

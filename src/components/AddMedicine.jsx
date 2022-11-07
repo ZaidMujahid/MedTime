@@ -1,37 +1,31 @@
 import React, { useEffect } from "react";
 import format from "date-fns/format";
 import { useRemindersContext } from "../hooks/useRemindersContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 import { MdDeleteOutline } from "react-icons/md";
 
 const AddMedicine = () => {
   const {reminders, dispatch} = useRemindersContext()
+  const {user} = useAuthContext()
 
   useEffect(() => {
     const fetchMedicine = async () => {
-      const response = await fetch("/reminders");
+      const response = await fetch("/reminders", {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
       const json = await response.json();
 
       if (response.ok) {
         dispatch({type: 'SET_REMINDERS', payload: json})
       }
     };
-    fetchMedicine();
-  }, []);
+    if(user){
+      fetchMedicine();
+    }
+  }, [dispatch, user]);
 
-
-  // Notification.requestPermission().then((allowed) => {
-  //   if (allowed === "granted") setPermission(true);
-  // });
-
-  //Tried this outside the return function
-  // medicines && medicines.map((medicine) =>(
-  //   if((medicine.time == new Date().toISOString()) && (permission == true)){
-  //     return new Notification("Example Notification")
-  //   }
-  // ))
-
-  // console.log(new Date().toISOString());
-  
   return (
     <div>
       <div className="border-sky-500">
@@ -44,8 +38,12 @@ const AddMedicine = () => {
               <span className="absolute right-[50px] md:right-20 mx-2 p-1 text-2xl bg-red-100 rounded-full hover:text-red-600">
                 <MdDeleteOutline onClick={
                 async () => {
+                  if(!user) {return}
                   const response = await fetch('/reminders/' + medicine._id, {
-                    method: 'DELETE'
+                    method: 'DELETE',
+                    headers: {
+                      'Authorization': `Bearer ${user.token}`
+                    }
                   })
                   const json = await response.json()
               
@@ -62,28 +60,12 @@ const AddMedicine = () => {
               <p className="font-medium"><strong>Description: </strong>
                 {medicine.about}
               </p>
-              <p className="font-medium"><strong>Remind At: </strong>
+              <p className="font-medium"><strong>Medicine taken At: </strong>
                 {format(new Date(medicine.time), "ccc PPp")}
               </p>
-              {/* Tried this inside the return function while mapping through the array*/}
-              {/* if((medicine.time == new Date().toISOString()) && (permission == true)){
-                  new Notification("Example Notification")
-                }  */}
             </div>
           ))}
       </div>
-
-      {/* Tried this inside the return function while mapping seperately */}
-      {/* <div>
-        {medicines && medicines.map((medicine) => (
-              <div>
-                {medicine.about}
-              if((medicine.time == new Date().toISOString()) && (permission == true)){
-                new Notification("Example Notification")
-              }
-              </div>
-        ))}
-      </div> */}
     </div>
   );
 };

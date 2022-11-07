@@ -3,5 +3,5 @@
     height: 65vh;
     margin-bottom: 16px;
     border-radius: 8px;
-    /* z-index: -1; */
+    z-index : 10;
 }

@@ -2,11 +2,17 @@ const express = require('express')
 const mongoose = require('mongoose')
 const router = express.Router()
 const Appointment = require('../models/appointmentModel')
+const requireAuth = require('../middleware/requireAuth')
+
+//middleware for protecting all the routes, first it will check if the user is authenticated if yes then it will move forward
+router.use(requireAuth)
 
 //GET all reminders
 router.get('/', async (req, res) => {
-    //find all the appointments and sort them according to the created time
-    const appointments = await Appointment.find({}).sort({time: -1})
+    const user_id = req.user._id
+
+    //find all the appointments based on user_id and sort them according to the created time
+    const appointments = await Appointment.find({ user_id }).sort({time: -1})
 
     res.status(200).json(appointments)
 })
@@ -46,7 +52,8 @@ router.post('/', async (req, res) => {
 
     //create a reminder
     try {
-        const appointment = await Appointment.create({name, number, description, time})
+        const user_id = req.user._id
+        const appointment = await Appointment.create({name, number, description, time, user_id})
         res.status(200).json(appointment)
         console.log(appointment);
     } catch (error) {

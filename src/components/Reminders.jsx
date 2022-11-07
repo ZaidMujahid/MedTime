@@ -4,7 +4,11 @@ import AddMedicine from "./AddMedicine";
 import AddAppoint from "./AddAppoint";
 import PopupAppoint from "./PopupAppoint";
 import PopupMed from "./PopupMed";
+import { useChange } from "../hooks/useChange";
+
 const Reminders = () => {
+  const {change: sectionChange} = useChange();
+  const handleSectionChange = () => {sectionChange();}
   const [change, setChange] = useState(false);
   const [med, setMed] = useState(false);
   const [appoint, setAppoint] = useState(false);
@@ -17,13 +21,14 @@ const Reminders = () => {
     <div>
       <div>
         <h1 className="text-center pt-2 font-bold text-gray-900 text-3xl">
-          Reminders
+          Medicines and Appointments
         </h1>
       </div>
       <div className="flex flex-row justify-evenly mt-8 shadow-lg">
         <button
           onClick={() => {
             setChange(false);
+            handleSectionChange();
           }}
           className={`${
             change ? "text-sky-500" : "bg-sky-500 text-white"
@@ -35,6 +40,7 @@ const Reminders = () => {
         <button
           onClick={() => {
             setChange(true);
+            handleSectionChange();
           }}
           className={`${
             change ? "bg-sky-500 text-white" : "text-sky-500"

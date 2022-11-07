@@ -1,26 +1,30 @@
 import React, { useEffect } from "react";
 import format from "date-fns/format";
 import { useRemindersContext } from "../hooks/useRemindersContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 import { MdDeleteOutline } from "react-icons/md";
 
 const AddMedicine = () => {
   const {reminders, dispatch} = useRemindersContext()
+  const {user} = useAuthContext()
 
   useEffect(() => {
     const fetchAppointment = async () => {
-      const response = await fetch("/appointments");
+      const response = await fetch("/appointments", {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
       const json = await response.json();
 
       if (response.ok) {
         dispatch({type: 'SET_REMINDERS', payload: json})
       }
     };
-    fetchAppointment();
-  }, []);
-
-  // Notification.requestPermission().then((allowed) => {
-  //   if (allowed === "granted") setPermission(true);
-  // });
+    if(user){
+      fetchAppointment();
+    }
+  }, [dispatch, user]);
 
   return (
     <div>
@@ -34,8 +38,12 @@ const AddMedicine = () => {
               <span className="absolute right-[50px] md:right-20 mx-2 p-1 text-2xl bg-red-100 rounded-full hover:text-red-600">
                 <MdDeleteOutline onClick={
                 async () => {
+                  if(!user) {return}
                   const response = await fetch('/appointments/' + appointment._id, {
-                    method: 'DELETE'
+                    method: 'DELETE',
+                    headers: {
+                      'Authorization': `Bearer ${user.token}`
+                    }
                   })
                   const json = await response.json()
               
@@ -52,7 +60,7 @@ const AddMedicine = () => {
               <p className="font-medium"><strong>Description: </strong>
                 {appointment.description}
               </p>
-              <p className="font-medium"><strong>Remind At: </strong>
+              <p className="font-medium"><strong>Appointment At: </strong>
                 {format(new Date(appointment.time), "ccc PPp")}
               </p>
             </div>

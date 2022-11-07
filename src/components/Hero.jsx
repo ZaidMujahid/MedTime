@@ -4,12 +4,10 @@ const Hero = () => {
   return (
     <div className="flex md:flex-row flex-col">
       <div className="flex flex-col justify-center">
-        <span className="font-bold text-[2.75rem] pb-2 bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-purple-900 md:pt-0 pt-6">Never Forget your Medicine</span>
-        <p className="text-gray-900 font-semibold">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia{" "}
-          <br />  ducimus exercitationem quod culpa nulla dicta repellat{" "}
-          <br /> voluptate enim
-          dignissimos autem? Lorem ipsum dolor sit
+        <span className="font-bold text-[2.75rem] pb-2 bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-purple-900 md:pt-0 pt-6">Track Medicines and Appointments</span>
+        <p className="text-gray-900 font-semibold text-xl">
+          Keep track of your medicines and appoiontments in your schedule
+          <br /> Also Navigate Hospitals and Pharmacies 
         </p>
       </div>
       <div>

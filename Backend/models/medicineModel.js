@@ -18,6 +18,10 @@ const medicineSchema = new Schema({
         type: Date,
         default: Date.now,
         required: true
+    },
+    user_id: {
+        type: String,
+        required : true
     }
 })
 

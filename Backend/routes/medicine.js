@@ -2,11 +2,17 @@ const express = require('express')
 const mongoose = require('mongoose')
 const router = express.Router()
 const Medicine = require('../models/medicineModel')
+const requireAuth = require('../middleware/requireAuth')
+
+//middleware for protecting all the routes, first it will check if the user is authenticated if yes then it will move forward
+router.use(requireAuth)
 
 //GET all reminders
 router.get('/', async (req, res) => {
-    //find all the medicines and sort them according to the created time
-    const medicines = await Medicine.find({}).sort({time: -1})
+    const user_id = req.user._id
+
+    //find all the medicines based on user_id and sort them according to the created time
+    const medicines = await Medicine.find({ user_id }).sort({time: -1})
 
     res.status(200).json(medicines)
 })
@@ -32,7 +38,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     //destructuring the required properties
     const {title, count, about, time} = req.body;
-
+    
     //error message
     let emptyFields = []
     if(!title) emptyFields.push('title')
@@ -45,7 +51,8 @@ router.post('/', async (req, res) => {
     
     //create a reminder
     try {
-        const medicine = await Medicine.create({title, count, about, time})
+        const user_id = req.user._id
+        const medicine = await Medicine.create({title, count, about, time, user_id})
         res.status(200).json(medicine)
     } catch (error) {
         res.status(400).json({error: error.message})
