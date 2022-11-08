@@ -34,7 +34,7 @@ const Reminders = () => {
             change ? "text-sky-500" : "bg-sky-500 text-white"
           } "py-2 px-8 mb-2 font-medium text-lg bg-sky-50  hover:shadow-medium border-2 border-sky-600 rounded-lg hover:text-white hover:bg-sky-500 transition-all duration-300`}
         >
-          Medicine
+          Medicines
         </button>
         
         <button

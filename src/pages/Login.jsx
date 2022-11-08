@@ -42,7 +42,7 @@ const Login = () => {
               type="submit"
               disabled={isloading}
             >
-              Login
+              Log in
             </button>
             {error && (
               <div className="text-lg text-red-600 block text-center">

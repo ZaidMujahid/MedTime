@@ -60,7 +60,7 @@ const AddMedicine = () => {
               <p className="font-medium"><strong>Description: </strong>
                 {appointment.description}
               </p>
-              <p className="font-medium"><strong>Appointment At: </strong>
+              <p className="font-medium"><strong>Upcoming Appointment At: </strong>
                 {format(new Date(appointment.time), "ccc PPp")}
               </p>
             </div>

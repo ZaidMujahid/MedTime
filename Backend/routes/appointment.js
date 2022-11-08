@@ -55,7 +55,6 @@ router.post('/', async (req, res) => {
         const user_id = req.user._id
         const appointment = await Appointment.create({name, number, description, time, user_id})
         res.status(200).json(appointment)
-        console.log(appointment);
     } catch (error) {
         res.status(400).json({error: error.message})
     }

@@ -42,7 +42,7 @@ const SignUp = () => {
                 type="submit"
                 disabled={isloading}
               >
-                Sign Up
+                Sign up
               </button>
               {error && <div className="text-lg text-red-600 block text-center">{error}</div>}
             </form>
