@@ -1,5 +1,4 @@
 {
-  "proxy": "http://localhost:4000",
   "name": "med-time",
   "version": "0.1.0",
   "private": true,

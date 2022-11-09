@@ -22,13 +22,19 @@ app.use('/reminders', medicineRoutes)
 app.use('/appointments', appointmentRoutes)
 app.use('/user', userRoutes)
 
+const port = process.env.PORT || 4000
+
+//for deployment
+if(process.env.NODE_ENV == "production"){
+    app.use(express.static("Frontend/build"));
+}
 
 //Connect to db
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         //getting port number through env file & listening to requests
-        app.listen(process.env.PORT, () => {
-            console.log('connected to db & listening on port', process.env.PORT);
+        app.listen(port , () => {
+            console.log(`connected to db & listening on port ${port}`);
         })
     })
     .catch((error) => {
