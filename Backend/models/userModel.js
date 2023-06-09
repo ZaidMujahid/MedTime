@@ -40,7 +40,7 @@ userSchema.statics.signup = async function(email, password) {
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt);
 
-    const user = await this.create({ email, password: hash })// we would generally have used User.create but User is not defined yet we are exporting it, so thats why we use this.create, while using this we cannot use arrow function we have to use older syntax
+    const user = await this.create({ email, password: hash })// we would generally have used User.create but User is not defined yet we are exporting it, so thats why we use this.create, while using this we cannot use arrow function we have to use old syntax
 
     return user //returning user to when we call the fucntion elsewhere
 }

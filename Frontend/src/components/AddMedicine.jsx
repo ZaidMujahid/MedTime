@@ -54,13 +54,13 @@ const AddMedicine = () => {
                 }/>
               </span>
               
-              <p className="pt-4 font-medium"><strong>Count: </strong>
+              <p className="pt-4 font-medium"><strong>Total medicines to be taken: </strong>
                 {medicine.count}
               </p>
               <p className="font-medium"><strong>Description: </strong>
                 {medicine.about}
               </p>
-              <p className="font-medium"><strong>Medicine taken At: </strong>
+              <p className="font-medium"><strong>To be taken at: </strong>
                 {format(new Date(medicine.time), "ccc PPp")}
               </p>
             </div>
