@@ -21,7 +21,7 @@ const PopupAppoint = ({ onClose }) => {
 
     const appointment = {name, number, description, time}
 
-    const response = await fetch('/appointments', {
+    const response = await fetch('https://medtracker-tinm.onrender.com/appointments', {
       method: 'POST',
       body: JSON.stringify(appointment),
       headers: {

@@ -10,7 +10,7 @@ const AddMedicine = () => {
 
   useEffect(() => {
     const fetchMedicine = async () => {
-      const response = await fetch("/reminders", {
+      const response = await fetch("https://medtracker-tinm.onrender.com/reminders", {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }

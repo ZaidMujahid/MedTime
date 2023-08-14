@@ -22,7 +22,7 @@ const PopupMed = ({ onClose }) => {
 
     const medicine = {title, count, about, time}
 
-    const response = await fetch('/reminders', {
+    const response = await fetch('https://medtracker-tinm.onrender.com/reminders', {
       method: 'POST',
       body: JSON.stringify(medicine),
       headers: {
