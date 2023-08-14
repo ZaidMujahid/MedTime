@@ -1,5 +1,5 @@
 require('dotenv').config(); 
-
+const cors = require("cors");
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express();
@@ -15,6 +15,9 @@ app.use((req, res, next) => {
     console.log(req.path, req.method);
     next()
 })
+app.use(cors({
+    origin: [process.env.FRONTEND_URL]
+}))
 
 //Using routes
 //when we fire req to /reminders then use medicineRoutes, so it will add the path according to the req, ex: for get it will be /reminders/
