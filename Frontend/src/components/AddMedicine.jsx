@@ -39,7 +39,7 @@ const AddMedicine = () => {
                 <MdDeleteOutline onClick={
                 async () => {
                   if(!user) {return}
-                  const response = await fetch('/reminders/' + medicine._id, {
+                  const response = await fetch('https://medtracker-tinm.onrender.com/reminders/' + medicine._id, {
                     method: 'DELETE',
                     headers: {
                       'Authorization': `Bearer ${user.token}`
