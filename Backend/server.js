@@ -15,11 +15,19 @@ app.use((req, res, next) => {
     console.log(req.path, req.method);
     next()
 })
-app.use(cors({
-    origin: [process.env.FRONTEND_URL],
-    credentials: true,
-}))
-
+app.use(cors())
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
+    );
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+    );
+    next();
+});
 //Using routes
 //when we fire req to /reminders then use medicineRoutes, so it will add the path according to the req, ex: for get it will be /reminders/
 app.use('/reminders', medicineRoutes)
