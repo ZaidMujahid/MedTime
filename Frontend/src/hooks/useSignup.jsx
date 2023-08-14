@@ -13,6 +13,7 @@ export const useSignup = () => {
         const response = await fetch('https://medtracker-tinm.onrender.com/user/signup', {
             method: 'POST',
             headers: {'Content-Type' : 'application/json'}, 
+            withCredentials: true,
             body: JSON.stringify({email, password})
         })
         const json = await response.json()
